@@ -24,6 +24,7 @@ public class MainFormController {
     public TableColumn colContactNumber;
     public TableColumn colSeeMore;
     public TableColumn colDelete;
+    public Button btnStudentSave;
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -34,34 +35,50 @@ public class MainFormController {
         colDelete.setCellValueFactory(new PropertyValueFactory<>("deleteBtn"));
 
         loadAllStudents();
+
+        //------------------------Listener---------------------
+        tblStudents.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        selectedStudentTm = newValue;
+                        txtName.setText(newValue.getName());
+                        txtContact.setText(newValue.getContact());
+                        btnStudentSave.setText("Update Student");
+                    }
+                });
+        //------------------------Listener---------------------
+
     }
 
+
+    private StudentTM selectedStudentTm = null;
 
 
     private void loadAllStudents() throws SQLException, ClassNotFoundException {
         ObservableList<StudentTM> tmList = FXCollections.observableArrayList();
 
-        for (StudentDto dto :studentBo.findAllStudents()
-             ) {
+        for (StudentDto dto : studentBo.findAllStudents()
+        ) {
             Button deleteButton = new Button("Delete");
             deleteButton.setStyle("-fx-background-color: #c0392b");
             Button seeMorButton = new Button("See More");
             seeMorButton.setStyle("-fx-background-color: #2980b9");
 
             StudentTM tm = new StudentTM(dto.getId(), dto.getName(), dto.getContact(),
-                    deleteButton,seeMorButton);
+                    deleteButton, seeMorButton);
             tmList.add(tm);
 
-            deleteButton.setOnAction(e->{
+            deleteButton.setOnAction(e -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                         "Are you sure?", ButtonType.YES, ButtonType.NO);
                 Optional<ButtonType> selectedButtonData = alert.showAndWait();
-                if (selectedButtonData.get().equals(ButtonType.YES)){
-                    try{
+                if (selectedButtonData.get().equals(ButtonType.YES)) {
+                    try {
                         studentBo.deleteStudentById(tm.getId());
                         new Alert(Alert.AlertType.INFORMATION, "Student Deleted").show();
                         loadAllStudents();
-                    }catch (Exception exception){
+                    } catch (Exception exception) {
                         new Alert(Alert.AlertType.ERROR, "Try Again").show();
                     }
                 }
@@ -75,12 +92,39 @@ public class MainFormController {
         StudentDto dto = new StudentDto();
         dto.setName(txtName.getText());
         dto.setContact(txtContact.getText());
-        try {
-            studentBo.saveStudent(dto);
-            new Alert(Alert.AlertType.INFORMATION, "Student Saved").show();
-            loadAllStudents();
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Try Again").show();
+
+
+        if (btnStudentSave.getText().equals("Update Student")) {
+
+            if (selectedStudentTm == null) {
+                new Alert(Alert.AlertType.ERROR, "Try Again").show();
+                return;
+            }
+            try {
+                dto.setId(selectedStudentTm.getId());
+                studentBo.updateStudent(dto);
+                new Alert(Alert.AlertType.INFORMATION, "Student Updated").show();
+                selectedStudentTm = null;
+                btnStudentSave.setText("Save Student");
+                loadAllStudents();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "Try Again").show();
+            }
+        } else {
+            try {
+                studentBo.saveStudent(dto);
+                new Alert(Alert.AlertType.INFORMATION, "Student Saved").show();
+                loadAllStudents();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "Try Again").show();
+            }
         }
+
+
+    }
+
+    public void newStudentOnAction(ActionEvent actionEvent) {
+        btnStudentSave.setText("Save Student");
+        selectedStudentTm = null;
     }
 }

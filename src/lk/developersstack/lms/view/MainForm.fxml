@@ -30,8 +30,8 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
-            <Button layoutX="382.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnSaveStudentOnAction" text="Save Student" />
-            <Button layoutX="538.0" layoutY="12.0" mnemonicParsing="false" text="+ new Student" />
+            <Button fx:id="btnStudentSave" layoutX="382.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnSaveStudentOnAction" prefHeight="25.0" prefWidth="134.0" text="Save Student" />
+            <Button layoutX="538.0" layoutY="12.0" mnemonicParsing="false" onAction="#newStudentOnAction" text="+ new Student" />
             <TextField layoutX="14.0" layoutY="75.0" prefHeight="29.0" prefWidth="615.0" promptText="search here">
                <font>
                   <Font name="System Bold" size="13.0" />
