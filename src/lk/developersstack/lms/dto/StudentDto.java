@@ -16,6 +16,9 @@ public class StudentDto {
     private List<Book> books = new ArrayList<>();
     private List<Program> programs = new ArrayList<>();
 
+    public StudentDto() {
+    }
+
     public StudentDto(long id, String name, String contact) {
         this.id = id;
         this.name = name;
