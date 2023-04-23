@@ -11,6 +11,7 @@ import lk.developersstack.lms.dto.StudentDto;
 import lk.developersstack.lms.view.tm.StudentTM;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class MainFormController {
     public TextField txtName;
@@ -50,8 +51,24 @@ public class MainFormController {
             StudentTM tm = new StudentTM(dto.getId(), dto.getName(), dto.getContact(),
                     deleteButton,seeMorButton);
             tmList.add(tm);
+
+            deleteButton.setOnAction(e->{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                        "Are you sure?", ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> selectedButtonData = alert.showAndWait();
+                if (selectedButtonData.get().equals(ButtonType.YES)){
+                    try{
+                        studentBo.deleteStudentById(tm.getId());
+                        new Alert(Alert.AlertType.INFORMATION, "Student Deleted").show();
+                        loadAllStudents();
+                    }catch (Exception exception){
+                        new Alert(Alert.AlertType.ERROR, "Try Again").show();
+                    }
+                }
+            });
         }
         tblStudents.setItems(tmList);
+        tblStudents.refresh();
     }
 
     public void btnSaveStudentOnAction(ActionEvent actionEvent) {
@@ -61,6 +78,7 @@ public class MainFormController {
         try {
             studentBo.saveStudent(dto);
             new Alert(Alert.AlertType.INFORMATION, "Student Saved").show();
+            loadAllStudents();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Try Again").show();
         }
