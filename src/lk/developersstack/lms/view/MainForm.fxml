@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.developersstack.lms.controller.MainFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="687.0" prefWidth="1358.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.developersstack.lms.controller.MainFormController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="320.0" prefWidth="648.0" style="-fx-background-color: #7f8c8d;">
+         <children>
+            <Label layoutX="11.0" layoutY="6.0" text="Student Management" textFill="#20009e">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Separator layoutX="14.0" layoutY="24.0" prefHeight="4.0" prefWidth="523.0" />
+            <TextField layoutX="14.0" layoutY="36.0" promptText="Student Name">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="197.0" layoutY="36.0" promptText="Contact Number">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
+            <Button layoutX="382.0" layoutY="38.0" mnemonicParsing="false" text="Save Student" />
+            <Button layoutX="538.0" layoutY="12.0" mnemonicParsing="false" text="+ new Student" />
+            <TextField layoutX="14.0" layoutY="75.0" prefHeight="29.0" prefWidth="615.0" promptText="search here">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
+            <TableView layoutX="14.0" layoutY="114.0" prefHeight="200.0" prefWidth="615.0">
+              <columns>
+                <TableColumn prefWidth="104.0" text="# Student Id" />
+                <TableColumn prefWidth="215.0" text="Student Name" />
+                  <TableColumn prefWidth="168.0" text="Contact Number" />
+                  <TableColumn prefWidth="126.0" text="Options" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="353.0" prefHeight="320.0" prefWidth="648.0" style="-fx-background-color: #ecf0f1;" />
+      <AnchorPane layoutX="682.0" layoutY="14.0" prefHeight="320.0" prefWidth="662.0" style="-fx-background-color: #ecf0f1;" />
+      <AnchorPane layoutX="682.0" layoutY="353.0" prefHeight="320.0" prefWidth="662.0" style="-fx-background-color: #ecf0f1;" />
+   </children>
 </AnchorPane>
