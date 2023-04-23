@@ -1,12 +1,37 @@
 package lk.developersstack.lms.entity;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
     private long id;
     private String name;
     private String contact;
+
+    //--------------mapping--------------
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            mappedBy = "student",
+            fetch = FetchType.EAGER)
+    private Laptop laptop;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "student",
+            fetch = FetchType.EAGER
+    )
+    private List<Book> books = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "students")
+    private List<Program> programs =
+            new ArrayList<>();
+
+    //--------------mapping--------------
 
     public Student() {
     }
@@ -15,6 +40,30 @@ public class Student {
         this.id = id;
         this.name = name;
         this.contact = contact;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public List<Program> getPrograms() {
+        return programs;
+    }
+
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
+    }
+
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
     }
 
     public long getId() {

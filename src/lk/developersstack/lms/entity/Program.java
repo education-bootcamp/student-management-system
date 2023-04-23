@@ -1,12 +1,30 @@
 package lk.developersstack.lms.entity;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Program {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "program_id")
     private long id;
     private String title;
     private int credit;
+
+    //--------------mapping--------------
+
+    @ManyToMany
+    @JoinTable(
+            name = "registration",
+            joinColumns = @JoinColumn(name = "program_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private List<Student> students=
+            new ArrayList<>();
+
+    //--------------mapping--------------
 
     public Program() {
     }
@@ -15,6 +33,14 @@ public class Program {
         this.id = id;
         this.title = title;
         this.credit = credit;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public long getId() {
