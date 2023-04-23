@@ -20,17 +20,17 @@
                </font>
             </Label>
             <Separator layoutX="14.0" layoutY="24.0" prefHeight="4.0" prefWidth="523.0" />
-            <TextField layoutX="14.0" layoutY="36.0" promptText="Student Name">
+            <TextField fx:id="txtName" layoutX="14.0" layoutY="36.0" promptText="Student Name">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
-            <TextField layoutX="197.0" layoutY="36.0" promptText="Contact Number">
+            <TextField fx:id="txtContact" layoutX="197.0" layoutY="36.0" promptText="Contact Number">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
-            <Button layoutX="382.0" layoutY="38.0" mnemonicParsing="false" text="Save Student" />
+            <Button layoutX="382.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnSaveStudentOnAction" text="Save Student" />
             <Button layoutX="538.0" layoutY="12.0" mnemonicParsing="false" text="+ new Student" />
             <TextField layoutX="14.0" layoutY="75.0" prefHeight="29.0" prefWidth="615.0" promptText="search here">
                <font>
