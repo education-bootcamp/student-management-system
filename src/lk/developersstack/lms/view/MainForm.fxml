@@ -37,12 +37,13 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
-            <TableView layoutX="14.0" layoutY="114.0" prefHeight="200.0" prefWidth="615.0">
+            <TableView fx:id="tblStudents" layoutX="14.0" layoutY="114.0" prefHeight="200.0" prefWidth="615.0">
               <columns>
-                <TableColumn prefWidth="104.0" text="# Student Id" />
-                <TableColumn prefWidth="215.0" text="Student Name" />
-                  <TableColumn prefWidth="168.0" text="Contact Number" />
-                  <TableColumn prefWidth="126.0" text="Options" />
+                <TableColumn fx:id="colStudentId" prefWidth="104.0" text="# Student Id" />
+                <TableColumn fx:id="colStudentName" prefWidth="135.0" text="Student Name" />
+                  <TableColumn fx:id="colContactNumber" prefWidth="128.0" text="Contact Number" />
+                  <TableColumn fx:id="colSeeMore" prefWidth="130.0" text="See More" />
+                  <TableColumn fx:id="colDelete" prefWidth="117.0" text="Delete" />
               </columns>
             </TableView>
          </children>

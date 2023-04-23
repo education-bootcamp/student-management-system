@@ -1,11 +1,14 @@
 package lk.developersstack.lms.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import lk.developersstack.lms.bo.BoFactory;
 import lk.developersstack.lms.bo.custom.StudentBo;
 import lk.developersstack.lms.dto.StudentDto;
+import lk.developersstack.lms.view.tm.StudentTM;
 
 import java.sql.SQLException;
 
@@ -14,13 +17,41 @@ public class MainFormController {
     public TextField txtContact;
 
     private final StudentBo studentBo = BoFactory.getInstance().getBo(BoFactory.BoType.STUDENT);
+    public TableView<StudentTM> tblStudents;
+    public TableColumn colStudentId;
+    public TableColumn colStudentName;
+    public TableColumn colContactNumber;
+    public TableColumn colSeeMore;
+    public TableColumn colDelete;
 
     public void initialize() throws SQLException, ClassNotFoundException {
+
+        colStudentId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colStudentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colContactNumber.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        colSeeMore.setCellValueFactory(new PropertyValueFactory<>("seeMoreBtn"));
+        colDelete.setCellValueFactory(new PropertyValueFactory<>("deleteBtn"));
+
         loadAllStudents();
     }
 
+
+
     private void loadAllStudents() throws SQLException, ClassNotFoundException {
-        System.out.println(studentBo.findAllStudents());
+        ObservableList<StudentTM> tmList = FXCollections.observableArrayList();
+
+        for (StudentDto dto :studentBo.findAllStudents()
+             ) {
+            Button deleteButton = new Button("Delete");
+            deleteButton.setStyle("-fx-background-color: #c0392b");
+            Button seeMorButton = new Button("See More");
+            seeMorButton.setStyle("-fx-background-color: #2980b9");
+
+            StudentTM tm = new StudentTM(dto.getId(), dto.getName(), dto.getContact(),
+                    deleteButton,seeMorButton);
+            tmList.add(tm);
+        }
+        tblStudents.setItems(tmList);
     }
 
     public void btnSaveStudentOnAction(ActionEvent actionEvent) {
