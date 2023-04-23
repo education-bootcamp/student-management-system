@@ -34,7 +34,7 @@ public class StudentDaoImpl implements StudentDao {
             if (selectedStudent!=null){
                 selectedStudent.setName(student.getName());
                 selectedStudent.setContact(student.getContact());
-                session.update(student);
+                session.update(selectedStudent);
                 session.getTransaction().commit();
                 return;
             }
