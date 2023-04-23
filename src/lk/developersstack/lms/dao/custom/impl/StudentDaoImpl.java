@@ -11,7 +11,7 @@ import java.util.List;
 public class StudentDaoImpl  implements StudentDao {
     @Override
     public void save(Student student) throws SQLException, ClassNotFoundException {
-        try(Session session = HibernateUtil.getInstance().getSession()){
+        try(Session session = HibernateUtil.getInstance().openSession()){
             session.beginTransaction();
             session.save(student);
             session.getTransaction().commit();
@@ -35,6 +35,8 @@ public class StudentDaoImpl  implements StudentDao {
 
     @Override
     public List<Student> findAll() throws SQLException, ClassNotFoundException {
-        return null;
+        try(Session session = HibernateUtil.getInstance().openSession()){
+            return session.createQuery("FROM Student", Student.class).list();
+        }
     }
 }
