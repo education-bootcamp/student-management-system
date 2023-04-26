@@ -9,7 +9,8 @@ import java.util.Date;
 @Entity
 public class Registration {
     @EmbeddedId
-    private RegistrationIds registrationIds=new RegistrationIds();/*we should initialize the object*/
+    private RegistrationIds registrationIds =
+            new RegistrationIds();/*we should initialize the object*/
 
 
     @ManyToOne

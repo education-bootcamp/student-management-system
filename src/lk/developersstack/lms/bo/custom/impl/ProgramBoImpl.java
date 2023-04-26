@@ -24,4 +24,9 @@ public class ProgramBoImpl implements ProgramBo {
     public List<Long> findAllStudentIds() {
         return programDao.findAllProgramIds();
     }
+
+    @Override
+    public void register(long studentId, long programId) {
+        programDao.register(studentId,programId);
+    }
 }

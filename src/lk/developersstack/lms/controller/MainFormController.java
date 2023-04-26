@@ -209,5 +209,20 @@ public class MainFormController {
     }
 
     public void btnRegisterOnAction(ActionEvent actionEvent) {
+        try {
+            programBo.register(
+                    cmbStudentForProgram.getValue(),
+                    cmbPrograms.getValue()
+            );
+            new Alert(Alert.AlertType.INFORMATION, "Registered").show();
+            loadAllRegistrations();
+        } catch (Exception e) {
+            System.out.println(e);
+            new Alert(Alert.AlertType.ERROR, "Try Again").show();
+        }
+    }
+
+    private void loadAllRegistrations() {
+        // iml
     }
 }

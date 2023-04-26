@@ -11,4 +11,5 @@ public interface ProgramBo {
     public void saveProgram(ProgramDto dto) throws SQLException, ClassNotFoundException;
 
     List<Long> findAllStudentIds();
+    void register(long studentId, long programId);
 }
