@@ -1,6 +1,7 @@
 package lk.developersstack.lms.bo;
 
 import lk.developersstack.lms.bo.custom.impl.LaptopBoImpl;
+import lk.developersstack.lms.bo.custom.impl.ProgramBoImpl;
 import lk.developersstack.lms.bo.custom.impl.StudentBoImpl;
 
 
@@ -25,7 +26,7 @@ public class BoFactory {
             case LAPTOP:
                 return (T)new LaptopBoImpl();
             case PROGRAM:
-                return null;
+                return (T) new ProgramBoImpl();
             default:
                 return null;
         }

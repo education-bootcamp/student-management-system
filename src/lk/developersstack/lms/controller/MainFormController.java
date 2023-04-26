@@ -7,8 +7,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.developersstack.lms.bo.BoFactory;
 import lk.developersstack.lms.bo.custom.LaptopBo;
+import lk.developersstack.lms.bo.custom.ProgramBo;
 import lk.developersstack.lms.bo.custom.StudentBo;
 import lk.developersstack.lms.dto.CreateLaptopDto;
+import lk.developersstack.lms.dto.ProgramDto;
 import lk.developersstack.lms.dto.StudentDto;
 import lk.developersstack.lms.view.tm.StudentTM;
 
@@ -21,6 +23,7 @@ public class MainFormController {
 
     private final StudentBo studentBo = BoFactory.getInstance().getBo(BoFactory.BoType.STUDENT);
     private final LaptopBo laptopBo = BoFactory.getInstance().getBo(BoFactory.BoType.LAPTOP);
+    private final ProgramBo programBo = BoFactory.getInstance().getBo(BoFactory.BoType.PROGRAM);
     public TableView<StudentTM> tblStudents;
     public TableColumn colStudentId;
     public TableColumn colStudentName;
@@ -35,6 +38,9 @@ public class MainFormController {
     public TableColumn colBrand;
     public TableColumn colLapDelete;
     public ComboBox<Long> cmbStudent;
+    public TextField txtProgramTitle;
+    public TextField txtProgramCredit;
+    public Button btnLaptopSave;
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -62,9 +68,9 @@ public class MainFormController {
     }
 
     private void loadAllStudentsForLaptopSection() throws SQLException, ClassNotFoundException {
-       ObservableList<Long> obList = FXCollections.observableArrayList();
-        for (StudentDto dto:studentBo.findAllStudents()
-             ) {
+        ObservableList<Long> obList = FXCollections.observableArrayList();
+        for (StudentDto dto : studentBo.findAllStudents()
+        ) {
             obList.add(dto.getId());
         }
         cmbStudent.setItems(obList);
@@ -165,5 +171,25 @@ public class MainFormController {
 
     private void loadAllLaptops() {
         // to be implemented
+    }
+
+    public void btnSaveProgram(ActionEvent actionEvent) {
+        try {
+            programBo.saveProgram(
+                    new ProgramDto(
+                            txtProgramTitle.getText(),
+                            Integer.parseInt(txtProgramCredit.getText())
+                    )
+            );
+            new Alert(Alert.AlertType.INFORMATION, "Program Saved").show();
+            loadAllPrograms();
+        } catch (Exception e) {
+            System.out.println(e);
+            new Alert(Alert.AlertType.ERROR, "Try Again").show();
+        }
+    }
+
+    private void loadAllPrograms() {
+        // to be implemented!
     }
 }
