@@ -41,6 +41,37 @@ public class HibernateUtil {
                 .addAnnotatedClass(Registration.class);
         return configuration.buildSessionFactory();
 
+
+        /*
+        * public class FactoryConfig {
+    private static FactoryConfig factoryConfig;
+    private final SessionFactory sessionFactory;
+
+    private FactoryConfig() {
+
+        Configuration config = new Configuration().addAnnotatedClass(Student.class).addAnnotatedClass(Program.class).addAnnotatedClass(Registration.class);
+        sessionFactory = config.buildSessionFactory();
+        Properties properties = new Properties();
+        try {
+            properties.load(ClassLoader.getSystemClassLoader().getResourceAsStream("hibernate.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static FactoryConfig getInstance() {
+        return factoryConfig == null ? factoryConfig = new FactoryConfig() : factoryConfig;
+    }
+
+    public Session getSession() {
+        return sessionFactory.openSession();
+    }
+}
+        *
+        *
+        * */
+
         /*StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml")
                 .build();
