@@ -1,6 +1,7 @@
 package lk.developersstack.lms.bo.custom;
 
 import lk.developersstack.lms.dto.CreateLaptopDto;
+import lk.developersstack.lms.dto.CustomRegistrationData;
 import lk.developersstack.lms.dto.ProgramDto;
 import lk.developersstack.lms.dto.StudentDto;
 
@@ -12,4 +13,5 @@ public interface ProgramBo {
 
     List<Long> findAllStudentIds();
     void register(long studentId, long programId);
+    List<CustomRegistrationData> findAllRegistrations();
 }

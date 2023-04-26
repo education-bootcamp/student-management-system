@@ -10,6 +10,7 @@ import lk.developersstack.lms.bo.custom.LaptopBo;
 import lk.developersstack.lms.bo.custom.ProgramBo;
 import lk.developersstack.lms.bo.custom.StudentBo;
 import lk.developersstack.lms.dto.CreateLaptopDto;
+import lk.developersstack.lms.dto.CustomRegistrationData;
 import lk.developersstack.lms.dto.ProgramDto;
 import lk.developersstack.lms.dto.StudentDto;
 import lk.developersstack.lms.view.tm.StudentTM;
@@ -41,7 +42,7 @@ public class MainFormController {
     public TextField txtProgramTitle;
     public TextField txtProgramCredit;
     public Button btnLaptopSave;
-    public TableView tblRegistrations;
+    public TableView<CustomRegistrationData> tblRegistrations;
     public TableColumn colRegId;
     public TableColumn colDate;
     public TableColumn colStudent;
@@ -57,9 +58,15 @@ public class MainFormController {
         colSeeMore.setCellValueFactory(new PropertyValueFactory<>("seeMoreBtn"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("deleteBtn"));
 
+
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colStudent.setCellValueFactory(new PropertyValueFactory<>("student"));
+        colProgram.setCellValueFactory(new PropertyValueFactory<>("title"));
+
         loadAllStudents();
         loadAllStudentsForLaptopSection();
         loadProgramsForRegistrationSection();
+        loadAllRegistrations();
         //------------------------Listener---------------------
         tblStudents.getSelectionModel()
                 .selectedItemProperty()
@@ -223,6 +230,8 @@ public class MainFormController {
     }
 
     private void loadAllRegistrations() {
-        // iml
+        ObservableList<CustomRegistrationData> list =
+                FXCollections.observableArrayList(programBo.findAllRegistrations());
+        tblRegistrations.setItems(list);
     }
 }
