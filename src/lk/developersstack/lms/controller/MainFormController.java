@@ -41,6 +41,13 @@ public class MainFormController {
     public TextField txtProgramTitle;
     public TextField txtProgramCredit;
     public Button btnLaptopSave;
+    public TableView tblRegistrations;
+    public TableColumn colRegId;
+    public TableColumn colDate;
+    public TableColumn colStudent;
+    public TableColumn colProgram;
+    public ComboBox<Long> cmbStudentForProgram;
+    public ComboBox<Long> cmbPrograms;
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -52,6 +59,7 @@ public class MainFormController {
 
         loadAllStudents();
         loadAllStudentsForLaptopSection();
+        loadProgramsForRegistrationSection();
         //------------------------Listener---------------------
         tblStudents.getSelectionModel()
                 .selectedItemProperty()
@@ -74,6 +82,13 @@ public class MainFormController {
             obList.add(dto.getId());
         }
         cmbStudent.setItems(obList);
+        cmbStudentForProgram.setItems(obList);
+    }
+    private void loadProgramsForRegistrationSection() throws SQLException, ClassNotFoundException {
+        ObservableList<Long> obList = FXCollections.observableArrayList(
+              programBo.findAllStudentIds()
+        );
+      cmbPrograms.setItems(obList);
     }
 
 
@@ -191,5 +206,8 @@ public class MainFormController {
 
     private void loadAllPrograms() {
         // to be implemented!
+    }
+
+    public void btnRegisterOnAction(ActionEvent actionEvent) {
     }
 }

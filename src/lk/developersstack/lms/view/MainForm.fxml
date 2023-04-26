@@ -111,6 +111,24 @@
             <ComboBox fx:id="cmbStudent" layoutX="26.0" layoutY="39.0" prefHeight="29.0" prefWidth="150.0" promptText="Student" />
             <Button fx:id="btnLaptopSave" layoutX="383.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnSaveLaptopOnAction" prefHeight="25.0" prefWidth="134.0" text="Save Laptop" />
          </children></AnchorPane>
-      <AnchorPane layoutX="682.0" layoutY="353.0" prefHeight="320.0" prefWidth="662.0" style="-fx-background-color: #ecf0f1;" />
+      <AnchorPane layoutX="682.0" layoutY="353.0" prefHeight="320.0" prefWidth="662.0" style="-fx-background-color: #7f8c8d;">
+         <children>
+            <TextField fx:id="txtLapSearch1" layoutX="33.0" layoutY="59.0" prefHeight="29.0" prefWidth="615.0" promptText="search here">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
+            <TableView fx:id="tblRegistrations" layoutX="33.0" layoutY="98.0" prefHeight="200.0" prefWidth="615.0">
+               <columns>
+                  <TableColumn fx:id="colRegId" prefWidth="104.0" text="#" />
+                  <TableColumn fx:id="colDate" prefWidth="100.0" text="Date" />
+                  <TableColumn fx:id="colStudent" prefWidth="179.0" text="Student" />
+                  <TableColumn fx:id="colProgram" prefWidth="229.0" text="Program" />
+               </columns>
+            </TableView>
+            <ComboBox fx:id="cmbStudentForProgram" layoutX="33.0" layoutY="23.0" prefHeight="29.0" prefWidth="150.0" promptText="Student" />
+            <Button layoutX="514.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="25.0" prefWidth="134.0" text="Register" />
+            <ComboBox fx:id="cmbPrograms" layoutX="191.0" layoutY="23.0" prefHeight="29.0" prefWidth="150.0" promptText="Program" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

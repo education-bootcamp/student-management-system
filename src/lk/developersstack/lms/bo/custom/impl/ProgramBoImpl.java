@@ -7,6 +7,7 @@ import lk.developersstack.lms.dto.ProgramDto;
 import lk.developersstack.lms.entity.Program;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProgramBoImpl implements ProgramBo {
     private final ProgramDao programDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.PROGRAM);
@@ -17,5 +18,10 @@ public class ProgramBoImpl implements ProgramBo {
         program.setTitle(dto.getTitle());
         program.setCredit(dto.getCredit());
         programDao.save(program);
+    }
+
+    @Override
+    public List<Long> findAllStudentIds() {
+        return programDao.findAllProgramIds();
     }
 }
