@@ -6,7 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.developersstack.lms.bo.BoFactory;
+import lk.developersstack.lms.bo.custom.LaptopBo;
 import lk.developersstack.lms.bo.custom.StudentBo;
+import lk.developersstack.lms.dto.CreateLaptopDto;
 import lk.developersstack.lms.dto.StudentDto;
 import lk.developersstack.lms.view.tm.StudentTM;
 
@@ -18,6 +20,7 @@ public class MainFormController {
     public TextField txtContact;
 
     private final StudentBo studentBo = BoFactory.getInstance().getBo(BoFactory.BoType.STUDENT);
+    private final LaptopBo laptopBo = BoFactory.getInstance().getBo(BoFactory.BoType.LAPTOP);
     public TableView<StudentTM> tblStudents;
     public TableColumn colStudentId;
     public TableColumn colStudentName;
@@ -31,7 +34,7 @@ public class MainFormController {
     public TableColumn colLapId;
     public TableColumn colBrand;
     public TableColumn colLapDelete;
-    public ComboBox cmbStudent;
+    public ComboBox<Long> cmbStudent;
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -143,5 +146,24 @@ public class MainFormController {
     public void newStudentOnAction(ActionEvent actionEvent) {
         btnStudentSave.setText("Save Student");
         selectedStudentTm = null;
+    }
+
+    public void btnSaveLaptopOnAction(ActionEvent actionEvent) {
+        try {
+            laptopBo.saveLaptop(
+                    new CreateLaptopDto(
+                            cmbStudent.getValue(),
+                            txtLapBrand.getText()
+                    )
+            );
+            new Alert(Alert.AlertType.INFORMATION, "Laptop Saved").show();
+            loadAllLaptops();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Try Again").show();
+        }
+    }
+
+    private void loadAllLaptops() {
+        // to be implemented
     }
 }

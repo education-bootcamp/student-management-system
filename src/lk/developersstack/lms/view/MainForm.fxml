@@ -76,6 +76,7 @@
                </columns>
             </TableView>
             <ComboBox fx:id="cmbStudent" layoutX="26.0" layoutY="39.0" prefHeight="29.0" prefWidth="150.0" promptText="Student" />
+            <Button fx:id="btnLaptopSave" layoutX="383.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnSaveLaptopOnAction" prefHeight="25.0" prefWidth="134.0" text="Save Laptop" />
          </children></AnchorPane>
       <AnchorPane layoutX="682.0" layoutY="353.0" prefHeight="320.0" prefWidth="662.0" style="-fx-background-color: #ecf0f1;" />
    </children>
